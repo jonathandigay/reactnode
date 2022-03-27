@@ -1,0 +1,10 @@
+.dashboard {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+
+  .content {
+    border: 1px solid rgba(255, 255, 255, 0.2s);
+    padding: 10px 20px;
+  }
+}
