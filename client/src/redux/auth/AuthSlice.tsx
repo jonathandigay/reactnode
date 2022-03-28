@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 interface Iinitials {
   user: any | object | string;
@@ -10,7 +9,7 @@ interface Iinitials {
   isSuccessMessage: string;
 }
 
-const userCookie: any = Cookies.get("user");
+const userCookie: any = localStorage.getItem("user");
 const user = userCookie && JSON.parse(userCookie);
 
 const initialAuth: Iinitials = {
@@ -32,7 +31,7 @@ export const register = createAsyncThunk(
   async (user: object, thunkAPI) => {
     try {
       const fetch = await axios.post(REGESTER_API, user).then((res) => {
-        Cookies.set("user", JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data));
         const data = res.data;
         return data;
       });
@@ -52,7 +51,7 @@ export const login = createAsyncThunk(
   async (user: object, thunkAPI) => {
     try {
       const fetch = await axios.post(LOGIN_API, user).then((res) => {
-        Cookies.set("user", JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data));
         const data = res.data;
         return data;
       });
@@ -76,7 +75,7 @@ export const AuthSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
-      Cookies.remove("user");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {

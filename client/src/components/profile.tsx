@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 const Profile = () => {
   const [uerInfo, setUserInfo] = useState<any>([]);
 
-  const gettoken: any = Cookies.get("user");
+  const gettoken: any = localStorage.getItem("user");
   const parsetoken = JSON.parse(gettoken);
   const token = String(parsetoken.token);
   useEffect(() => {
