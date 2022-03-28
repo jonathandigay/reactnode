@@ -7,7 +7,6 @@ const Profile = () => {
   const gettoken: any = Cookies.get("user");
   const parsetoken = JSON.parse(gettoken);
   const token = String(parsetoken.token);
-  console.log(token);
   useEffect(() => {
     const getuser = async () => {
       try {
