@@ -12,6 +12,9 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-google-oidc": "^0.1.0"
   },
+  "engines": {
+    "npm": "6.x"
+  },
   "scripts": {
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
