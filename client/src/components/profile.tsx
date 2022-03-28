@@ -11,7 +11,7 @@ const Profile = () => {
     const getuser = async () => {
       try {
         await axios
-          .get("http://localhost:3001/getuser", {
+          .get("/getuser", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -20,9 +20,10 @@ const Profile = () => {
             const info = [];
             info.push(res.data.user);
             setUserInfo(info);
+            console.log(info);
           });
       } catch (e: any) {
-        console.log(e.response);
+        console.log(e);
       }
     };
     getuser();

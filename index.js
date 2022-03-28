@@ -3,14 +3,15 @@ const app = express();
 const { dbconnect } = require("./db/db");
 const cors = require("cors");
 require("dotenv").config();
+const path = require("path");
 // middleware
 
 // production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(__dirname, "../client/build"));
+  app.use(express.static(path.resolve(__dirname, "./client/build")));
 
   app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
   });
 }
 
