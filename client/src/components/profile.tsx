@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 const Profile = () => {
   const [uerInfo, setUserInfo] = useState<any>([]);
@@ -7,6 +7,7 @@ const Profile = () => {
   const gettoken: any = Cookies.get("user");
   const parsetoken = JSON.parse(gettoken);
   const token = String(parsetoken.token);
+  console.log(token);
   useEffect(() => {
     const getuser = async () => {
       try {
@@ -20,14 +21,13 @@ const Profile = () => {
             const info = [];
             info.push(res.data.user);
             setUserInfo(info);
-            console.log(info);
           });
       } catch (e: any) {
         console.log(e);
       }
     };
     getuser();
-  }, [token]);
+  }, []);
   return (
     <div>
       {uerInfo &&

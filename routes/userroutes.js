@@ -42,19 +42,25 @@ Router.post("/registeruser", async (req, res) => {
 Router.post("/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const user = await usersCollection.findOne({ email });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    res.status(200).json({
-      message: "success",
-      user,
-      token: generatetoken(user),
-    });
-  } else if (!user) {
-    res.status(400).json({ message: "email doesn't exist!" });
-  } else if (!(await bcrypt.compare(password, user.password))) {
-    res.status(400).json({ message: "wrong password!" });
+  try {
+    const user = await usersCollection.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(200).json({
+        message: "success",
+        user,
+        token: generatetoken(user),
+      });
+    } else if (!user) {
+      res.status(400).json({ message: "email doesn't exist!" });
+    } else if (!(await bcrypt.compare(password, user.password))) {
+      res.status(400).json({ message: "wrong password!" });
+    }
+  } catch (e) {
+    console.log(e);
   }
+
   return;
 });
 
